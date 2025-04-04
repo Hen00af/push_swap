@@ -1,41 +1,55 @@
+#include "push_swap.h"
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct stack_s
-{
-    int value;              // ノードの値
-    struct stack_s *next;   // 次のノードへのポインタ
-    struct stack_s *prev;   // 前のノードへのポインタ
-} stack_t;
 
-typedef struct stack_info_s
+t_DList	*create_dlist(void)
 {
-    stack_t *head;  // リストの先頭
-    stack_t *tail;  // リストの末尾
-    int length;     // ノードの数
-} stack_info_t;
+	t_DList *list;
 
-stack_t *create_node(int value){
-    stack_t *new_node = (stack_t *)malloc(sizeof(stack_t));
-    if(!new_node) return NULL;
-    new_node->value = value;
-    new_node->next = NULL;
-    new_node->prev = NULL;
-    return new_node;
+	list = (t_DList *)malloc(sizeof(t_DList));
+	if (!list)
+		return (NULL);
+	list->head = NULL;
+	list->tail = NULL;
+	list->size = 0;
+	return (list);
 }
 
-int main() {
-    stack_info_t *list = create_dlist();
+void	print_list_forward(t_DList *list)
+{
+	t_DNode *current = list->head;
+	while (current != NULL)
+	{
+		printf("%d ", current->value);
+		current = current->next;
+	}
+	printf("\n");
+}
+void	print_list_behind(t_DList *list)
+{
+	stack_t *current = list->tail;
+	while (current != NULL)
+	{
+		printf("%d ", current->value);
+		current = current->prev;
+	}
+	printf("\n");
+}
 
-    add_front(list, 10);
-    add_front(list, 20);
-    add_back(list, 30);
-    add_back(list, 40);
+int	main(void)
+{
+	t_DList *list = create_dlist();
 
-    print_list_forward(list);
-    print_list_behind(list);
-    printf("\n");
+	add_front(list, 10);
+	add_front(list, 20);
+	add_back(list, 30);
+	add_back(list, 40);
 
-    free_list(list);
-    return 0;
+	print_list_forward(list);
+	print_list_behind(list);
+	printf("\n");
+
+	free_list(list);
+	return (0);
 }
