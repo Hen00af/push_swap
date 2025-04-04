@@ -1,29 +1,41 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error_handling.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+
+	+:+     */
+/*   By: shattori <shattori@student.42.fr>          +#+  +:+
+	+#+        */
+/*                                                +#+#+#+#+#+
+	+#+           */
+/*   Created: 2025/04/05 04:58:26 by shattori          #+#    #+#             */
+/*   Updated: 2025/04/05 04:58:26 by shattori         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <push_swap.h>
+
 
 int	*search_same_number_and_coodinate_compression(int argc, char **argv)
 {
 	int i;
 	int j;
-	int order;
 	int *tmp;
 
 	i = 0;
 	j = 0;
-	order = 0;
 	tmp = malloc(sizeof(int) * (argc));
 	if (!tmp)
-	{
-		free(tmp);
 		exit(1);
-	}
 	while (i < argc)
 	{
 		tmp[i] = ft_atoi(argv[i]);
 		i++;
 	}
+	i = 0;
 	while (i < argc)
 	{
-		j = 0;
+		j = i + 1;
 		while (j < argc)
 		{
 			if (tmp[i] == tmp[j] && i != j)
@@ -35,19 +47,10 @@ int	*search_same_number_and_coodinate_compression(int argc, char **argv)
 			}
 			j++;
 		}
-		coodinate_compression(tmp, &order, i);
 		i++;
 	}
+	ft_coordinate_compression(tmp, i);
 	return (tmp);
-}
-
-void	coodinate_compression(int *tmp, int *order, int i)
-{
-	if (tmp[i] == i)
-	{
-		tmp[i] = *order;
-		*(order)++;
-	}
 }
 
 int	*error_handling_and_coodinate_compression(int argc, char **argv)

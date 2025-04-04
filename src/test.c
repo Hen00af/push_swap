@@ -3,33 +3,28 @@
 #include <stdlib.h>
 
 
-t_DList	*create_dlist(void)
-{
-	t_DList *list;
-
-	list = (t_DList *)malloc(sizeof(t_DList));
-	if (!list)
-		return (NULL);
-	list->head = NULL;
-	list->tail = NULL;
-	list->size = 0;
-	return (list);
-}
-
 void	print_list_forward(t_DList *list)
 {
-	t_DNode *current = list->head;
-	while (current != NULL)
+	t_DNode *current;
+
+	current = list->head;
+	printf("List forward: ");
+	while (current)
 	{
 		printf("%d ", current->value);
 		current = current->next;
 	}
 	printf("\n");
 }
+
 void	print_list_behind(t_DList *list)
 {
-	stack_t *current = list->tail;
-	while (current != NULL)
+	t_DNode *current;
+	int i;
+
+	current = list->tail;
+	printf("List backward: ");
+	while (current)
 	{
 		printf("%d ", current->value);
 		current = current->prev;
@@ -39,13 +34,13 @@ void	print_list_behind(t_DList *list)
 
 int	main(void)
 {
-	t_DList *list = create_dlist();
+	t_DList *list = initialize_stack();
 
 	add_front(list, 10);
 	add_front(list, 20);
 	add_back(list, 30);
 	add_back(list, 40);
-
+	printf("List size: %d\n", list->size);
 	print_list_forward(list);
 	print_list_behind(list);
 	printf("\n");

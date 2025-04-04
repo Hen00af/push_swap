@@ -1,17 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   operations3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shattori <shattori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/05 06:09:33 by shattori          #+#    #+#             */
-/*   Updated: 2025/04/05 06:12:55 by shattori         ###   ########.fr       */
+/*   Created: 2025/04/05 05:51:49 by shattori          #+#    #+#             */
+/*   Updated: 2025/04/05 05:52:20 by shattori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	push_swap(t_DList *a_stack, t_DList *b_stack, int argc)
+void ft_rrr(t_DList *a_stack, t_DList *b_stack)
 {
+	ft_rra(a_stack);
+	ft_rrb(b_stack);
 }

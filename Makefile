@@ -6,9 +6,13 @@ LIBFT_DIR = ./libft
 LIBFT_AR = $(LIBFT_DIR)/libft.a
 SRCS_DIR = ./src/
 SRCS = $(addprefix $(SRCS_DIR),\
-        push_swap.c \
+        main.c \
         error_handling.c \
-    )
+		ft_coordinate_compression.c \
+		operations.c \
+		operations2.c \
+		operations3.c \
+		push_swap.c)
 OBJS =  $(SRCS:.c=.o)
 all: $(NAME)
 
