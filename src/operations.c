@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operation.c                                        :+:      :+:    :+:   */
+/*   operations.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shattori <shattori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 05:18:22 by shattori          #+#    #+#             */
-/*   Updated: 2025/04/05 05:50:41 by shattori         ###   ########.fr       */
+/*   Updated: 2025/04/05 06:34:15 by shattori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	ft_sa(t_DList *a_stack)
 	tmp = a_stack->head->value;
 	a_stack->head->value = a_stack->head->next->value;
 	a_stack->head->next->value = tmp;
+	write(1, "sa\n", 3);
 }
 
 void	ft_sb(t_DList *b_stack)
@@ -32,6 +33,7 @@ void	ft_sb(t_DList *b_stack)
 	tmp = b_stack->head->value;
 	b_stack->head->value = b_stack->head->next->value;
 	b_stack->head->next->value = tmp;
+	write(1, "sb\n", 3);
 }
 
 void	ft_pa(t_DList *a_stack, t_DList *b_stack)
@@ -54,6 +56,7 @@ void	ft_pa(t_DList *a_stack, t_DList *b_stack)
 		a_stack->tail = tmp;
 	a_stack->size++;
 	b_stack->size--;
+	write(1, "pa\n", 3);
 }
 void	ft_pb(t_DList *a_stack, t_DList *b_stack)
 {
@@ -75,6 +78,7 @@ void	ft_pb(t_DList *a_stack, t_DList *b_stack)
 		b_stack->tail = tmp;
 	a_stack->size--;
 	b_stack->size++;
+	write(1, "pb\n", 3);
 }
 void	ft_ra(t_DList *a_stack)
 {
@@ -89,4 +93,5 @@ void	ft_ra(t_DList *a_stack)
 	a_stack->tail->next = tmp;
 	tmp->prev = a_stack->tail;
 	a_stack->tail = tmp;
+	write(1, "ra\n", 3);
 }

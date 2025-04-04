@@ -26,7 +26,12 @@
 int	*error_handling_and_coodinate_compression(int argc, char **argv);
 void	populate_node_from_args(t_DList *a_stack, int argc, int *original);
 void	ft_coordinate_compression(int *tmp, int i);
-void	push_swap(t_DList *a_stack, t_DList *b_stack, int argc);
+void	push_swap(t_DList *a_stack, t_DList *b_stack, int *number,
+		int number_arg);
+void	dealing2(t_DList *a_stack, t_DList *b_stack, int *number);
+void	dealing3(t_DList *a_stack, t_DList *b_stack, int *number);
+void	dealing4(t_DList *a_stack, t_DList *b_stack, int *number);
+
 void	ft_pa(t_DList *a_stack, t_DList *b_stack);
 void	ft_pb(t_DList *a_stack, t_DList *b_stack);
 void	ft_sa(t_DList *a_stack);
