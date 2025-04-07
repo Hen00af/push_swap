@@ -6,7 +6,7 @@
 /*   By: shattori <shattori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 05:18:22 by shattori          #+#    #+#             */
-/*   Updated: 2025/04/05 06:34:15 by shattori         ###   ########.fr       */
+/*   Updated: 2025/04/05 20:32:47 by shattori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_sa(t_DList *a_stack)
 	tmp = a_stack->head->value;
 	a_stack->head->value = a_stack->head->next->value;
 	a_stack->head->next->value = tmp;
-	write(1, "sa\n", 3);
+	ft_putstr_fd("sa\n", 1);
 }
 
 void	ft_sb(t_DList *b_stack)
@@ -33,7 +33,7 @@ void	ft_sb(t_DList *b_stack)
 	tmp = b_stack->head->value;
 	b_stack->head->value = b_stack->head->next->value;
 	b_stack->head->next->value = tmp;
-	write(1, "sb\n", 3);
+	ft_putstr_fd("sb\n", 1);
 }
 
 void	ft_pa(t_DList *a_stack, t_DList *b_stack)
@@ -56,29 +56,30 @@ void	ft_pa(t_DList *a_stack, t_DList *b_stack)
 		a_stack->tail = tmp;
 	a_stack->size++;
 	b_stack->size--;
-	write(1, "pa\n", 3);
+	ft_putstr_fd("pa\n", 1);
 }
 void	ft_pb(t_DList *a_stack, t_DList *b_stack)
 {
 	t_DNode	*tmp;
 
-	if (a_stack->head == NULL)
+	if (a_stack->tail == NULL)
 		return ;
-	tmp = a_stack->head;
-	a_stack->head = a_stack->head->next;
-	if (a_stack->head != NULL)
-		a_stack->head->prev = NULL;
+	tmp = a_stack->tail;
+	a_stack->tail = a_stack->tail->prev;
+	if (a_stack->tail != NULL)
+		a_stack->tail->next = NULL;
 	else
-		a_stack->tail = NULL;
+		a_stack->head = NULL;
+	tmp->prev = NULL;
 	tmp->next = b_stack->head;
 	if (b_stack->head != NULL)
 		b_stack->head->prev = tmp;
 	b_stack->head = tmp;
 	if (b_stack->tail == NULL)
 		b_stack->tail = tmp;
-	a_stack->size--;
 	b_stack->size++;
-	write(1, "pb\n", 3);
+	a_stack->size--;
+	ft_putstr_fd("pb\n", 1);
 }
 void	ft_ra(t_DList *a_stack)
 {
@@ -93,5 +94,5 @@ void	ft_ra(t_DList *a_stack)
 	a_stack->tail->next = tmp;
 	tmp->prev = a_stack->tail;
 	a_stack->tail = tmp;
-	write(1, "ra\n", 3);
+	ft_putstr_fd("ra\n", 1);
 }

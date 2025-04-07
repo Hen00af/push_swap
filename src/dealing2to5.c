@@ -6,11 +6,27 @@
 /*   By: shattori <shattori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 06:25:27 by shattori          #+#    #+#             */
-/*   Updated: 2025/04/05 06:58:17 by shattori         ###   ########.fr       */
+/*   Updated: 2025/04/05 20:39:25 by shattori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	test(t_DList *a_stack, int i)
+{
+	t_DNode	*current;
+	int		j;
+
+	j = 0;
+	current = a_stack->head;
+	while (current)
+	{
+		printf("a_stack[%d]: %d\n", j, current->value);
+		current = current->next;
+		j++;
+	}
+	printf("\n");
+}
 
 void	dealing2(t_DList *a_stack, t_DList *b_stack, int *number)
 {
@@ -20,29 +36,36 @@ void	dealing2(t_DList *a_stack, t_DList *b_stack, int *number)
 
 void	dealing3(t_DList *a_stack, t_DList *b_stack, int *number)
 {
-	if (number[2] < number[1] && number[1] < number[0])
+	test(a_stack, 0);
+	if (number[0] == 0 && number[1] == 2)
 	{
-		ft_sa(a_stack);
 		ft_rra(a_stack);
 	}
-	else if (number[2] < number[0] && number[0] < number[1])
-		ft_rra(a_stack);
-	else if (number[1] < number[0] && number[0] < number[2])
+	else if (number[0] == 1 && number[1] == 0)
+		ft_ra(a_stack);
+	else if (number[0] == 1 && number[1] == 2)
 	{
 		ft_sa(a_stack);
 		ft_ra(a_stack);
 	}
-	else if (number[1] < number[2] && number[2] < number[0])
+	else if (number[0] == 2 && number[1] == 0)
+		ft_sa(a_stack);
+	else if (number[0] == 2 && number[1] == 1)
+	{
+		ft_sa(a_stack);
 		ft_ra(a_stack);
-	else if (number[0] < number[1] && number[1] < number[2])
-		return ;
+	}
+	test(a_stack, 0);
 }
 
 void	dealing4(t_DList *a_stack, t_DList *b_stack, int *number)
 {
-	if (number[3] < number[2] < number[1] < number[0])
-	{
-		ft_sa(a_stack);
-		ft_rra(a_stack);
-	}
+	test(a_stack, 0);
+	while (a_stack->tail->value != 0)
+		ft_ra(a_stack);
+	test(a_stack, 0);
+	ft_pb(a_stack, b_stack);
+	dealing3(a_stack, b_stack, number);
+	ft_pa(a_stack, b_stack);
+	test(a_stack, 0);
 }

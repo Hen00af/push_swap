@@ -1,3 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+
+	+:+     */
+/*   By: shattori <shattori@student.42.fr>          +#+  +:+
+	+#+        */
+/*                                                +#+#+#+#+#+
+	+#+           */
+/*   Created: 2025/04/05 19:06:33 by shattori          #+#    #+#             */
+/*   Updated: 2025/04/05 19:06:33 by shattori         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <push_swap.h>
 
 
@@ -15,32 +30,33 @@ void	populate_node_from_args(t_DList *a_stack, int argc, int *number)
 	}
 }
 
-void	test(t_DList *a_stack, int i)
-{
-	t_DNode *current;
-	int j;
+// void	test(t_DList *a_stack, int i)
+// {
+// 	t_DNode *current;
+// 	int j;
 
-	j = 0;
-	current = a_stack->head;
-	while (current)
-	{
-		printf("a_stack[%d]: %d\n", j, current->value);
-		current = current->next;
-		j++;
-	}
-	printf("\n");
+// 	j = 0;
+// 	current = a_stack->head;
+// 	while (current)
+// 	{
+// 		printf("a_stack[%d]: %d\n", j, current->value);
+// 		current = current->next;
+// 		j++;
+// 	}
+// 	printf("\n");
 
-	ft_ra(a_stack);
+// 	ft_ra(a_stack);
 
-	current = a_stack->head;
-	while (current)
-	{
-		printf("a_stack[%d]: %d\n", j, current->value);
-		current = current->next;
-	}
-	printf("\n");
-	ft_rra(a_stack);
-}
+// 	current = a_stack->head;
+// 	while (current)
+// 	{
+// 		printf("a_stack[%d]: %d\n", j, current->value);
+// 		current = current->next;
+// 	}
+// 	printf("\n");
+// 	ft_rra(a_stack);
+// }
+
 int	main(int argc, char **argv)
 {
 	t_DList *a_stack;
