@@ -6,7 +6,7 @@
 /*   By: shattori <shattori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 06:25:27 by shattori          #+#    #+#             */
-/*   Updated: 2025/04/05 20:39:25 by shattori         ###   ########.fr       */
+/*   Updated: 2025/04/08 16:56:08 by shattori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,31 +30,33 @@ void	test(t_DList *a_stack, int i)
 
 void	dealing2(t_DList *a_stack, t_DList *b_stack, int *number)
 {
-	if (number[0] > number[1])
+	test(a_stack, 0);
+	if (number[1] > number[0])
 		ft_sa(a_stack);
+	test(a_stack, 0);
 }
 
 void	dealing3(t_DList *a_stack, t_DList *b_stack, int *number)
 {
+	search_are_they_sorted(a_stack, b_stack);
+	printf("dealing3\n");
 	test(a_stack, 0);
-	if (number[0] == 0 && number[1] == 2)
+	if (number[0] == 1 && number[1] == 2)
 	{
-		ft_rra(a_stack);
+		ft_sa(a_stack);
+		ft_ra(a_stack);
 	}
 	else if (number[0] == 1 && number[1] == 0)
 		ft_ra(a_stack);
-	else if (number[0] == 1 && number[1] == 2)
+	else if (number[0] == 0 && number[1] == 1)
 	{
 		ft_sa(a_stack);
-		ft_ra(a_stack);
+		ft_rra(a_stack);
 	}
+	else if (number[0] == 0 && number[1] == 2)
+		ft_rra(a_stack);
 	else if (number[0] == 2 && number[1] == 0)
 		ft_sa(a_stack);
-	else if (number[0] == 2 && number[1] == 1)
-	{
-		ft_sa(a_stack);
-		ft_ra(a_stack);
-	}
 	test(a_stack, 0);
 }
 
