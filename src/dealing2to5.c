@@ -6,7 +6,7 @@
 /*   By: shattori <shattori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 06:25:27 by shattori          #+#    #+#             */
-/*   Updated: 2025/04/08 16:56:08 by shattori         ###   ########.fr       */
+/*   Updated: 2025/04/08 17:06:02 by shattori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	dealing2(t_DList *a_stack, t_DList *b_stack, int *number)
 
 void	dealing3(t_DList *a_stack, t_DList *b_stack, int *number)
 {
-	search_are_they_sorted(a_stack, b_stack);
 	printf("dealing3\n");
 	test(a_stack, 0);
 	if (number[0] == 1 && number[1] == 2)
