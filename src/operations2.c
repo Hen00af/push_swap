@@ -6,7 +6,7 @@
 /*   By: shattori <shattori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 05:48:07 by shattori          #+#    #+#             */
-/*   Updated: 2025/04/05 19:12:51 by shattori         ###   ########.fr       */
+/*   Updated: 2025/04/10 08:19:18 by shattori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_rra(t_DList *a_stack)
 	if (a_stack->head == NULL || a_stack->head->next == NULL)
 		return ;
 	tmp = a_stack->tail;
-	a_stack->tail = a_stack->tail->prev;
+	a_stack->tail = tmp->prev;
 	a_stack->tail->next = NULL;
 	tmp->prev = NULL;
 	tmp->next = a_stack->head;

@@ -26,15 +26,22 @@
 int	*error_handling_and_coodinate_compression(int argc, char **argv);
 void	populate_node_from_args(t_DList *a_stack, int argc, int *original);
 void	ft_coordinate_compression(int *tmp, int i);
-int 	search_are_they_sorted(t_DList *a_stack, t_DList *b_stack);
-t_DNode *take_pivot(t_DList *stack, int *number);
+int	search_are_they_sorted(t_DList *a_stack, t_DList *b_stack);
+t_DNode	*take_pivot(t_DList *stack);
 void	push_swap(t_DList *a_stack, t_DList *b_stack, int *number,
 		int number_arg);
 void	dealing2(t_DList *a_stack, t_DList *b_stack, int *number);
 void	dealing3(t_DList *a_stack, t_DList *b_stack, int *number);
 void	dealing4(t_DList *a_stack, t_DList *b_stack, int *number);
-void	dealing5(t_DList *a_stack, t_DList *b_stack,int *number);
-void dealing6(t_DList *a_stack, t_DList *b_stack,int *number);
+void	dealing5(t_DList *a_stack, t_DList *b_stack, int *number);
+void	dealing6(t_DList *a_stack, t_DList *b_stack, int *number);
+void	dealing_more_than_seven(t_DList *a_stack, t_DList *b_stack,
+		int *number);
+void	push_smaller_than_pivot(t_DList *a_stack, t_DList *b_stack,
+		t_DNode *pivot);
+void	quick_sort_a(t_DList *a, t_DList *b);
+void	quick_sort_b(t_DList *a, t_DList *b);
+
 void	ft_pa(t_DList *a_stack, t_DList *b_stack);
 void	ft_pb(t_DList *a_stack, t_DList *b_stack);
 void	ft_sa(t_DList *a_stack);
@@ -48,5 +55,7 @@ void	ft_rrb(t_DList *b_stack);
 void	ft_rrr(t_DList *a_stack, t_DList *b_stack);
 void	sa(t_DList *afnc);
 void	sb(t_DList *bfnc);
+
+void	test(t_DList *a_stack, int i);
 
 #endif // PUSH_SWAP_H

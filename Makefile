@@ -13,7 +13,8 @@ SRCS = $(addprefix $(SRCS_DIR),\
 		operations2.c \
 		operations3.c \
 		push_swap.c\
-		dealing2to5.c)
+		dealing2to5.c\
+		utils.c)
 OBJS =  $(SRCS:.c=.o)
 all: $(NAME)
 
