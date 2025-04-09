@@ -62,25 +62,28 @@ void	ft_pb(t_DList *a_stack, t_DList *b_stack)
 {
 	t_DNode	*tmp;
 
-	if (a_stack->tail == NULL)
+	if (a_stack->head == NULL)
 		return ;
-	tmp = a_stack->tail;
-	a_stack->tail = a_stack->tail->prev;
-	if (a_stack->tail != NULL)
-		a_stack->tail->next = NULL;
+	tmp = a_stack->head;
+	a_stack->head = a_stack->head->next;
+	if (a_stack->head != NULL)
+		a_stack->head->prev = NULL;
 	else
-		a_stack->head = NULL;
-	tmp->prev = NULL;
+		a_stack->tail = NULL;
+
 	tmp->next = b_stack->head;
 	if (b_stack->head != NULL)
 		b_stack->head->prev = tmp;
+	tmp->prev = NULL;
 	b_stack->head = tmp;
 	if (b_stack->tail == NULL)
 		b_stack->tail = tmp;
-	b_stack->size++;
+
 	a_stack->size--;
+	b_stack->size++;
 	ft_putstr_fd("pb\n", 1);
 }
+
 void	ft_ra(t_DList *a_stack)
 {
 	t_DNode	*tmp;

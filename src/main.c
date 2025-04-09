@@ -72,6 +72,7 @@ int	main(int argc, char **argv)
 
 	populate_node_from_args(a_stack, argc, number);
 	// test(a_stack, i);
+	// printf("a_stack->head : %d\n", a_stack->head->value);
 	push_swap(a_stack, b_stack, number, argc - 1);
 	ft_free_list(a_stack);
 	ft_free_list(b_stack);

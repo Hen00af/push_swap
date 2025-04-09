@@ -19,22 +19,23 @@ void	ft_rrr(t_DList *a_stack, t_DList *b_stack)
 	ft_putstr_fd("rrr\n", 1);
 }
 
-void	search_are_they_sorted(t_DList *a_stack, t_DList *b_stack)
+int search_are_they_sorted(t_DList *a_stack, t_DList *b_stack)
 {
 	t_DNode	*current;
 
 	current = a_stack->head;
 	while (current && current->next)
 	{
-		if (current->value < current->next->value)
-			exit(0);
+		if (current->value > current->next->value)
+			return(1);
 		current = current->next;
 	}
 	current = b_stack->head;
 	while (current && current->next)
 	{
-		if (current->value < current->next->value)
-			exit(0);
+		if (current->value > current->next->value)
+			return(1);
 		current = current->next;
 	}
+	return(0);
 }
