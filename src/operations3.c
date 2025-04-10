@@ -6,7 +6,7 @@
 /*   By: shattori <shattori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 05:51:49 by shattori          #+#    #+#             */
-/*   Updated: 2025/04/10 08:15:12 by shattori         ###   ########.fr       */
+/*   Updated: 2025/04/10 08:26:48 by shattori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	quick_sort_b(t_DList *a, t_DList *b)
 
 	if (b->size <= 3)
 	{
-		dealing3(a, b,0);
+		dealing3(a, b, 0);
 		return ;
 	}
 	pivot = take_pivot(b);
@@ -134,12 +134,10 @@ void	dealing_more_than_seven(t_DList *a_stack, t_DList *b_stack, int *number)
 void	push_smaller_than_pivot(t_DList *a, t_DList *b, t_DNode *pivot)
 {
 	int	i;
-	int	pushed;
 	int	rotate_count;
 	int	size;
 
 	i = 0;
-	pushed = 0;
 	rotate_count = 0;
 	size = a->size;
 	while (i < size)
@@ -147,7 +145,6 @@ void	push_smaller_than_pivot(t_DList *a, t_DList *b, t_DNode *pivot)
 		if (a->head->value < pivot->value)
 		{
 			ft_pb(a, b);
-			pushed++;
 		}
 		else
 		{
@@ -155,6 +152,7 @@ void	push_smaller_than_pivot(t_DList *a, t_DList *b, t_DNode *pivot)
 			rotate_count++;
 		}
 		i++;
+		size = a->size;
 	}
 	while (rotate_count--)
 		ft_rra(a);
