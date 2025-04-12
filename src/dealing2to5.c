@@ -6,7 +6,7 @@
 /*   By: shattori <shattori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 06:25:27 by shattori          #+#    #+#             */
-/*   Updated: 2025/04/10 06:09:49 by shattori         ###   ########.fr       */
+/*   Updated: 2025/04/12 16:51:32 by shattori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	dealing2(t_DList *a_stack, t_DList *b_stack, int *number)
 	printf("dealing2\n");
 	current = a_stack->head;
 	test(a_stack, 0);
-	if (a_stack->head->value > a_stack->tail->value)
+	if (head_value(a_stack) > a_stack->tail->value)
 		ft_sa(a_stack);
 	test(a_stack, 0);
 }
@@ -78,7 +78,7 @@ void	dealing4(t_DList *a_stack, t_DList *b_stack, int *number)
 	printf("dealing4");
 	test(a_stack, 0);
 	if (a_stack->head->next->value)
-		while (a_stack->head->value != 0)
+		while (head_value(a_stack) != 0)
 			ft_ra(a_stack);
 	test(a_stack, 0);
 	ft_pb(a_stack, b_stack);
@@ -91,11 +91,11 @@ void	dealing5(t_DList *a_stack, t_DList *b_stack, int *number)
 {
 	printf("dealing5");
 	test(a_stack, 0);
-	while (a_stack->head->value != 0)
+	while (head_value(a_stack) != 0)
 		ft_ra(a_stack);
 	ft_pb(a_stack, b_stack);
 	test(a_stack, 0);
-	while (a_stack->head->value != 1)
+	while (head_value(a_stack) != 1)
 		ft_ra(a_stack);
 	ft_pb(a_stack, b_stack);
 	test(a_stack, 0);
@@ -109,13 +109,13 @@ void	dealing5(t_DList *a_stack, t_DList *b_stack, int *number)
 void	dealing6(t_DList *a_stack, t_DList *b_stack, int *number)
 {
 	printf("dealing6");
-	while (a_stack->head->value != 0)
+	while (head_value(a_stack) != 0)
 		ft_ra(a_stack);
 	ft_pb(a_stack, b_stack);
-	while (a_stack->head->value != 1)
+	while (head_value(a_stack) != 1)
 		ft_ra(a_stack);
 	ft_pb(a_stack, b_stack);
-	while (a_stack->head->value != 2)
+	while (head_value(a_stack) != 2)
 		ft_ra(a_stack);
 	ft_pb(a_stack, b_stack);
 	dealing3(a_stack, b_stack, number);

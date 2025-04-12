@@ -17,6 +17,7 @@
 # define PUSH_SWAP_H
 
 # include "../libft/libft.h"
+#include "math.h"
 # include <limits.h>
 # include <stdarg.h>
 # include <stdio.h>
@@ -41,7 +42,8 @@ void	push_smaller_than_pivot(t_DList *a_stack, t_DList *b_stack,
 		t_DNode *pivot);
 void	quick_sort_a(t_DList *a, t_DList *b);
 void	quick_sort_b(t_DList *a, t_DList *b);
-
+int	head_value(t_DList *stack);
+/*--------------------OPERATIONS----------------------*/
 void	ft_pa(t_DList *a_stack, t_DList *b_stack);
 void	ft_pb(t_DList *a_stack, t_DList *b_stack);
 void	ft_sa(t_DList *a_stack);

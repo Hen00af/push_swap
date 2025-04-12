@@ -6,7 +6,7 @@
 /*   By: shattori <shattori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 05:18:22 by shattori          #+#    #+#             */
-/*   Updated: 2025/04/05 20:32:47 by shattori         ###   ########.fr       */
+/*   Updated: 2025/04/12 16:52:43 by shattori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_sa(t_DList *a_stack)
 
 	if (a_stack->head == NULL || a_stack->head->next == NULL)
 		return ;
-	tmp = a_stack->head->value;
+	tmp = head_value(a_stack);
 	a_stack->head->value = a_stack->head->next->value;
 	a_stack->head->next->value = tmp;
 	ft_putstr_fd("sa\n", 1);
@@ -70,7 +70,6 @@ void	ft_pb(t_DList *a_stack, t_DList *b_stack)
 		a_stack->head->prev = NULL;
 	else
 		a_stack->tail = NULL;
-
 	tmp->next = b_stack->head;
 	if (b_stack->head != NULL)
 		b_stack->head->prev = tmp;
@@ -78,7 +77,6 @@ void	ft_pb(t_DList *a_stack, t_DList *b_stack)
 	b_stack->head = tmp;
 	if (b_stack->tail == NULL)
 		b_stack->tail = tmp;
-
 	a_stack->size--;
 	b_stack->size++;
 	ft_putstr_fd("pb\n", 1);

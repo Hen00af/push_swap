@@ -1,33 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   math.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shattori <shattori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/12 16:36:22 by shattori          #+#    #+#             */
-/*   Updated: 2025/04/12 16:48:56 by shattori         ###   ########.fr       */
+/*   Created: 2025/04/12 16:33:57 by shattori          #+#    #+#             */
+/*   Updated: 2025/04/12 16:35:33 by shattori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#ifndef MATH_H
+# define MATH_H
 
-int	ft_max(int i, int j)
-{
-	if (i < j)
-		return (i);
-	else
-		return (j);
-}
-int	ft_min(int i, int j)
-{
-	if (i < j)
-		return (j);
-	else
-		return (i);
-}
+int ft_max(int i,int j);
+int ft_min(int i,int j);
 
-int	head_value(t_DList *stack)
-{
-	return (stack->head->value);
-}
+
+#endif // MATH_H
