@@ -6,22 +6,22 @@
 /*   By: shattori <shattori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 06:25:27 by shattori          #+#    #+#             */
-/*   Updated: 2025/04/12 16:51:32 by shattori         ###   ########.fr       */
+/*   Updated: 2025/04/14 17:22:48 by shattori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	test(t_DList *a_stack, int i)
+void	test(t_DList *stack, int i)
 {
 	t_DNode	*current;
 	int		j;
 
 	j = 0;
-	current = a_stack->head;
+	current = stack->head;
 	while (current)
 	{
-		printf("a_stack[%d]: %d\n", j, current->value);
+		printf("stack[%d]: %d\n", j, current->value);
 		current = current->next;
 		j++;
 	}
@@ -41,14 +41,14 @@ void	dealing2(t_DList *a_stack, t_DList *b_stack, int *number)
 	test(a_stack, 0);
 }
 
-void	dealing3(t_DList *a_stack, t_DList *b_stack, int *number)
+void	dealing3(t_DList *a_stack, t_DList *b_stack)
 {
 	t_DNode	*cur;
 	int		a;
 	int		b;
 	int		c;
 
-	printf("dealing3");
+
 	cur = a_stack->head;
 	a = cur->value;
 	b = cur->next->value;
@@ -70,6 +70,7 @@ void	dealing3(t_DList *a_stack, t_DList *b_stack, int *number)
 		ft_sa(a_stack);
 		ft_rra(a_stack);
 	}
+	printf("\ndealing3\n");
 	test(a_stack, 0);
 }
 
@@ -82,7 +83,7 @@ void	dealing4(t_DList *a_stack, t_DList *b_stack, int *number)
 			ft_ra(a_stack);
 	test(a_stack, 0);
 	ft_pb(a_stack, b_stack);
-	dealing3(a_stack, b_stack, number);
+	dealing3(a_stack, b_stack);
 	ft_pa(a_stack, b_stack);
 	test(a_stack, 0);
 }
@@ -99,7 +100,7 @@ void	dealing5(t_DList *a_stack, t_DList *b_stack, int *number)
 		ft_ra(a_stack);
 	ft_pb(a_stack, b_stack);
 	test(a_stack, 0);
-	dealing3(a_stack, b_stack, number);
+	dealing3(a_stack, b_stack);
 	test(a_stack, 0);
 	ft_pa(a_stack, b_stack);
 	ft_pa(a_stack, b_stack);
@@ -118,7 +119,7 @@ void	dealing6(t_DList *a_stack, t_DList *b_stack, int *number)
 	while (head_value(a_stack) != 2)
 		ft_ra(a_stack);
 	ft_pb(a_stack, b_stack);
-	dealing3(a_stack, b_stack, number);
+	dealing3(a_stack, b_stack);
 	test(a_stack, 0);
 	ft_pa(a_stack, b_stack);
 	ft_pa(a_stack, b_stack);

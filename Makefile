@@ -16,12 +16,13 @@ SRCS = $(addprefix $(SRCS_DIR),\
 		dealing2to5.c\
 		utils.c)
 OBJS =  $(SRCS:.c=.o)
-all: $(NAME)
+all: $(NAME) clean
 
 $(NAME): $(OBJS) $(LIBFT_AR)
 	$(CC) $(CFLAGS) $(IFLAGS) $(OBJS) $(LIBFT_AR) -o $(NAME)
 $(LIBFT_AR):
 	$(MAKE) -C $(LIBFT_DIR)
+
 %.o: %.c
 	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 

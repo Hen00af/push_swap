@@ -25,7 +25,7 @@ void	populate_node_from_args(t_DList *a_stack, int argc, int *number)
 	i = 0;
 	while (i < argc - 1)
 	{
-		ft_add_front(a_stack, number[i]);
+		ft_add_back(a_stack, number[i]);
 		i++;
 	}
 }
