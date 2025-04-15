@@ -26,6 +26,13 @@ int	ft_min(int i, int j)
 	else
 		return (j);
 }
+int ft_abs(int num)
+{
+    if(num < 0)
+        return(-1*num);
+    else
+        return(num);
+}
 
 int	head_value(t_DList *stack)
 {

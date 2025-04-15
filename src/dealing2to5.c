@@ -48,7 +48,6 @@ void	dealing3(t_DList *a_stack, t_DList *b_stack)
 	int		b;
 	int		c;
 
-
 	cur = a_stack->head;
 	a = cur->value;
 	b = cur->next->value;
