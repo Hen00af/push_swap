@@ -6,7 +6,7 @@
 /*   By: shattori <shattori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 05:51:49 by shattori          #+#    #+#             */
-/*   Updated: 2025/04/14 17:42:34 by shattori         ###   ########.fr       */
+/*   Updated: 2025/04/15 17:36:48 by shattori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	search_are_they_sorted(t_DList *a_stack, t_DList *b_stack)
 	}
 	return (0);
 }
+
 int	calculate_total_cost(int a_cost, int b_cost)
 {
 	if ((a_cost >= 0 && b_cost >= 0) || (a_cost < 0 && b_cost < 0))
@@ -46,19 +47,26 @@ int	calculate_total_cost(int a_cost, int b_cost)
 	return (a_cost + b_cost);
 }
 
-t_move	find_cheapest_move(t_DList *a_stack, t_DList *b_stack)
+int	select_direction(int idx, int list_size)
 {
-	t_move	best_move;
-	t_move	move;
+	if (2 * idx > list_size)
+		return (idx - list_size);
+	return (idx);
+}
 
-	best_move.total_cost = INT_MAX;
-	for (int i = 0; i < a_stack->size; i++)
-	{
-		move = calculate_move(a_stack, b_stack, i);
-		if (move.total_cost < best_move.total_cost)
-			best_move = move;
-	}
-	return (best_move);
+int	find_cheapest_move(t_DList *a_stack, t_DList *b_stack, t_move best_move)
+{
+	int		idx_b;
+	t_move	tmp_move;
+
+	idx_b = 0;
+	// while ()
+	// {
+	// 	tmp_move.a_cost = find_insert_position(a_stack, b_stack, idx_b);
+	// 	tmp_move.a_cost = select_direction(tmp_move.a_cost, a_stack->size);
+	// 	tmp_move.b_cost = select_direction(idx_b, b_stack->size);
+	// 	tmp_move.total_cost = 0;
+	// }
 }
 
 void	execute_move(t_DList *a_stack, t_DList *b_stack, t_move move)
@@ -66,8 +74,8 @@ void	execute_move(t_DList *a_stack, t_DList *b_stack, t_move move)
 	int	a_cost;
 	int	b_cost;
 
-	a_cost = move.a_cost;
-	b_cost = move.b_cost;
+	a_cost = 1;
+	b_cost = 1;
 	while (a_cost > 0 && b_cost > 0)
 	{
 		ft_rr(a_stack, b_stack);
@@ -113,48 +121,58 @@ int	ft_cmp_int(const void *a, const void *b)
 	return (ai - bi);
 }
 
-int	find_nth_min(t_DList *stack, int n)
+int	is_target_for_pb(int value)
 {
-	t_DNode	*current;
-	int		*arr;
-	int		i;
-	int		result;
+	return (value == 0 || value == 1 || value == 2);
+}
 
-	current = stack->head;
-	i = 0;
-	arr = malloc(sizeof(int) * stack->size);
-	if (!arr)
-		return (0);
-	while (current)
+void	judge_how_to_pb(t_DList *a_stack, t_DList *b_stack, int *push_count)
+{
+	int	a_val;
+
+	a_val = head_value(a_stack);
+	if (!is_target_for_pb(a_val) || b_stack->size != 0)
 	{
-		arr[i++] = current->value;
-		current = current->next;
+		if (tail_value(b_stack) < head_value(b_stack)
+			&& b_stack->head->value != 0)
+			ft_rr(a_stack, b_stack);
+		else
+			ft_ra(a_stack);
 	}
-	ft_qsort(arr, stack->size, sizeof(int), ft_cmp_int);
-	result = arr[n - 1];
-	free(arr);
-	return (result);
+	else
+	{
+		ft_pb(a_stack, b_stack);
+		(*push_count)++;
+	}
 }
 
 void	push_a_to_b(t_DList *a_stack, t_DList *b_stack)
 {
-	int	size;
-	int	median;
-	int	count;
-	int	min;
+	int	push_count;
+	int	a_val;
 
-	size = a_stack->size;
-	count = 0;
+	push_count = 0;
 	while (a_stack->size > 3)
 	{
-		min = find_nth_min(a_stack, 3);
-		if (a_stack->head->value < min)
-			ft_ra(a_stack);
-		else
+		a_val = head_value(a_stack);
+		ft_pb(a_stack,b_stack);
+		printf("%d",b_stack->size);
+		if (!is_target_for_pb(a_val) || b_stack->size > 0)
 		{
-			ft_pb(a_stack, b_stack);
-			count++;
+			if (tail_value(b_stack) < head_value(b_stack))
+			{
+				printf("%d", b_stack->head->value);
+				ft_rr(a_stack, b_stack);
+			}
+			else
+			{
+				ft_ra(a_stack);
+				printf("%d", b_stack->size);
+			}
 		}
+			ft_pb(a_stack, b_stack);
+			push_count++;
+		
 	}
 	printf("push_a_to_b\n");
 	test(a_stack, 1);
@@ -162,21 +180,16 @@ void	push_a_to_b(t_DList *a_stack, t_DList *b_stack)
 
 void	push_b_to_a(t_DList *a_stack, t_DList *b_stack)
 {
-	int	target_index;
-	int	a_size;
+	t_move	best_move;
 
-	while (b_stack->size > 0)
-	{
-		target_index = find_insert_position(a_stack, head_value(b_stack));
-		a_size = a_stack->size;
-		if (target_index <= a_size / 2)
-			while (target_index-- > 0)
-				ft_ra(a_stack);
-		else
-			while (target_index++ < a_size)
-				ft_rra(a_stack);
-		ft_pa(a_stack, b_stack);
-	}
+	// while (b_stack->size > 0)
+	// {
+	// 	calculate_move();
+	// 	find_cheapest_move(a_stack, b_stack, best_move);
+	// 	printf("best.a;%d\nbest.b%d\n", best_move.a_cost, best_move.b_cost);
+	// 	execute_move(a_stack, b_stack, best_move);
+	// 	b_stack->size--;
+	// }
 }
 
 int	get_value_at(t_DList *stack, int index)
@@ -197,40 +210,53 @@ int	get_value_at(t_DList *stack, int index)
 		return (current->value);
 	return (INT_MAX);
 }
-int	find_insert_position(t_DList *stack, int value)
-{
-	t_DNode	*current;
-	int		index;
 
-	current = stack->head;
-	index = 0;
-	while (current != NULL)
+void	locate_node(t_DNode *node, t_DList *stack, int idx_b)
+{
+	int	i;
+
+	i = 0;
+	node = stack->head;
+	while (i < idx_b)
 	{
-		if (value > current->value)
-			break ;
-		current = current->next;
-		index++;
+		node = node->next;
+		i++;
 	}
-	return (index);
+}
+
+int	find_insert_position(t_DList *a_stack, t_DList *b_stack, int idx_b)
+{
+	int		idx_a;
+	t_DNode	*curr_a;
+	t_DNode	*prev_a;
+	t_DNode	*elem_b;
+
+	idx_a = 0;
+	locate_node(elem_b, b_stack, idx_b);
+	while (idx_a < a_stack->size)
+	{
+		locate_node(curr_a, a_stack, idx_b);
+		locate_node(prev_a, a_stack, idx_a - 1);
+		if (prev_a->value < elem_b->value && prev_a < elem_b)
+			return (idx_a);
+		if (prev_a->value < curr_a->value)
+			if (elem_b->next < curr_a->next
+				|| prev_a->prev->value < elem_b->value)
+				return (idx_a);
+		idx_a++;
+	}
+	return (idx_a);
 }
 
 t_move	calculate_move(t_DList *a_stack, t_DList *b_stack, int a_index)
 {
-	t_move	move;
-	int		a_size;
-	int		b_size;
-	int		value;
-	int		b_index;
+	int		idx_b;
+	t_move	tmp_move;
 
-	a_size = a_stack->size;
-	b_size = b_stack->size;
-	move.index_a = a_index;
-	move.a_cost = (a_index <= a_size / 2) ? a_index : a_index - a_size;
-	value = get_value_at(a_stack, a_index);
-	b_index = find_insert_position(b_stack, value);
-	move.b_cost = (b_index <= b_size / 2) ? b_index : b_index - b_size;
-	move.total_cost = calculate_total_cost(move.a_cost, move.b_cost);
-	return (move);
+	// idx_b = 0;
+	// while ()
+	// {
+	// }
 }
 
 void	dealing_more_than_seven(t_DList *a_stack, t_DList *b_stack, int *number)
@@ -238,6 +264,6 @@ void	dealing_more_than_seven(t_DList *a_stack, t_DList *b_stack, int *number)
 	push_a_to_b(a_stack, b_stack);
 	test(b_stack, 1);
 	dealing3(a_stack, b_stack);
-	push_b_to_a(a_stack, b_stack);
+	// push_b_to_a(a_stack, b_stack);
 	test(a_stack, 0);
 }

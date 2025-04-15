@@ -17,7 +17,7 @@
 # define PUSH_SWAP_H
 
 # include "../libft/libft.h"
-#include "math.h"
+# include "math.h"
 # include <limits.h>
 # include <stdarg.h>
 # include <stdio.h>
@@ -25,14 +25,16 @@
 # include <unistd.h>
 # define ERROR -1
 
-typedef struct s_move {
+typedef struct s_move
+{
 	int a_cost;
 	int b_cost;
 	int total_cost;
-	int index_a; 
+	int index_a;
 } t_move;
 
-int	find_insert_position(t_DList *stack, int value);
+int	find_insert_position(t_DList *a_stack, t_DList *b_stack, int idx_b);
+int	tail_value(t_DList *stack);
 t_move	calculate_move(t_DList *a_stack, t_DList *b_stack, int a_index);
 int	*error_handling_and_coodinate_compression(int argc, char **argv);
 void	populate_node_from_args(t_DList *a_stack, int argc, int *original);
@@ -52,6 +54,7 @@ void	push_smaller_than_pivot(t_DList *a_stack, t_DList *b_stack,
 		t_DNode *pivot);
 void	quick_sort_a(t_DList *a, t_DList *b);
 void	quick_sort_b(t_DList *a, t_DList *b);
+void	locate_node(t_DNode *node, t_DList *stack, int idx_b);
 
 int	head_value(t_DList *stack);
 /*--------------------OPERATIONS----------------------*/

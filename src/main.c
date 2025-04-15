@@ -71,9 +71,10 @@ int	main(int argc, char **argv)
 	b_stack = ft_initialize_stack();
 
 	populate_node_from_args(a_stack, argc, number);
+	test(a_stack, 1);
 	// test(a_stack, i);
 	// printf("a_stack->head : %d\n", head_value(a_stack));
-	push_swap(a_stack, b_stack, number, argc - 1);
+	push_swap(a_stack, b_stack, number, argc - 1) ;
 	ft_free_list(a_stack);
 	ft_free_list(b_stack);
 	free(number);
