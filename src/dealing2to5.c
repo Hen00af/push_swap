@@ -6,7 +6,7 @@
 /*   By: shattori <shattori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 06:25:27 by shattori          #+#    #+#             */
-/*   Updated: 2025/04/20 20:56:00 by shattori         ###   ########.fr       */
+/*   Updated: 2025/04/20 21:25:27 by shattori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,24 @@ void	test(t_DList *stack, int i)
 	current = stack->head;
 	while (current)
 	{
-		// printf("stack[%d]: %d\n", j, current->value);
+		printf("%d\n", current->value);
 		current = current->next;
 		j++;
 	}
-	// printf("\n");
 }
 
 void	dealing2(t_DList *a_stack)
 {
+	int	next;
+	int	value;
+
+	value = a_stack->head->value;
+	next = a_stack->head->next->value;
+	printf("\n%d", value);
+	printf("%d\n", next);
 	if (!a_stack || a_stack->size < 2)
 		return ;
-	if (a_stack->head->value > a_stack->head->next->value)
+	if (value > next)
 		ft_sa(a_stack);
 }
 
