@@ -23,13 +23,13 @@ void	print_list_behind(t_DList *list)
 	int i;
 
 	current = list->tail;
-	printf("List backward: ");
+	// printf("List backward: ");
 	while (current)
 	{
-		printf("%d ", current->value);
+		// printf("%d ", current->value);
 		current = current->prev;
 	}
-	printf("\n");
+	// printf("\n");
 }
 
 int	main(void)
@@ -40,10 +40,10 @@ int	main(void)
 	add_front(list, 20);
 	add_back(list, 30);
 	add_back(list, 40);
-	printf("List size: %d\n", list->size);
+	// printf("List size: %d\n", list->size);
 	print_list_forward(list);
 	print_list_behind(list);
-	printf("\n");
+	// printf("\n");
 
 	free_list(list);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: shattori <shattori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 05:51:49 by shattori          #+#    #+#             */
-/*   Updated: 2025/04/15 17:36:48 by shattori         ###   ########.fr       */
+/*   Updated: 2025/04/20 20:36:52 by shattori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ int	search_are_they_sorted(t_DList *a_stack, t_DList *b_stack)
 	}
 	return (0);
 }
-#include <stdlib.h>
+#include "push_swap.h" // 必要に応じて自分のヘッダをインクルード
 #include <limits.h>
 #include <stdio.h>
-#include "push_swap.h"  // 必要に応じて自分のヘッダをインクルード
+#include <stdlib.h>
 
 int	select_direction(int idx, int list_size)
 {
@@ -79,18 +79,24 @@ void	execute_move(t_DList *a_stack, t_DList *b_stack, t_move *move)
 
 int	ft_cmp_int(const void *a, const void *b)
 {
-	int	ai = *(const int *)a;
-	int	bi = *(const int *)b;
+	int	ai;
+	int	bi;
+
+	ai = *(const int *)a;
+	bi = *(const int *)b;
 	return (ai - bi);
 }
 
 int	find_nth_max(t_DList *stack, int n)
 {
-	t_DNode	*current = stack->head;
-	int		*arr = malloc(sizeof(int) * stack->size);
-	int		i = 0;
+	t_DNode	*current;
+	int		*arr;
+	int		i;
 	int		result;
 
+	current = stack->head;
+	arr = malloc(sizeof(int) * stack->size);
+	i = 0;
 	if (!arr)
 		return (0);
 	while (current)
@@ -106,11 +112,13 @@ int	find_nth_max(t_DList *stack, int n)
 
 void	push_a_to_b(t_DList *a_stack, t_DList *b_stack)
 {
-	int	i = 0;
-	int	push_count = 0;
+	int	i;
+	int	push_count;
 	int	a_val;
 	int	max;
 
+	i = 0;
+	push_count = 0;
 	while (a_stack->size > 3)
 	{
 		max = find_nth_max(a_stack, i);
@@ -126,7 +134,7 @@ void	push_a_to_b(t_DList *a_stack, t_DList *b_stack)
 			push_count++;
 		}
 	}
-	printf("push_a_to_b\n");
+	// printf("push_a_to_b\n");
 	test(a_stack, 1);
 	test(b_stack, 1);
 }
@@ -145,9 +153,11 @@ void	push_b_to_a(t_DList *a_stack, t_DList *b_stack)
 
 t_DNode	*locate_node(t_DList *stack, int idx)
 {
-	t_DNode	*node = stack->head;
-	int		i = 0;
+	t_DNode	*node;
+	int		i;
 
+	node = stack->head;
+	i = 0;
 	while (node && i < idx)
 	{
 		node = node->next;
@@ -158,23 +168,26 @@ t_DNode	*locate_node(t_DList *stack, int idx)
 
 int	find_insert_position(t_DList *a_stack, t_DList *b_stack, int idx_b)
 {
-	int		idx_a = 0;
+	int		idx_a;
 	t_DNode	*curr_a;
 	t_DNode	*prev_a;
-	t_DNode	*elem_b = locate_node(b_stack, idx_b);
+	t_DNode	*elem_b;
 
+	idx_a = 0;
+	elem_b = locate_node(b_stack, idx_b);
 	if (!elem_b)
 		return (0);
 	while (idx_a < a_stack->size)
 	{
 		curr_a = locate_node(a_stack, idx_a);
-		prev_a = locate_node(a_stack, (idx_a - 1 + a_stack->size) % a_stack->size);
+		prev_a = locate_node(a_stack, (idx_a - 1 + a_stack->size)
+				% a_stack->size);
 		if (!curr_a || !prev_a)
-			break;
+			break ;
 		if (prev_a->value < elem_b->value && elem_b->value < curr_a->value)
 			return (idx_a);
-		if ((prev_a->value > curr_a->value) &&
-			(elem_b->value > prev_a->value || elem_b->value < curr_a->value))
+		if ((prev_a->value > curr_a->value) && (elem_b->value > prev_a->value
+				|| elem_b->value < curr_a->value))
 			return (idx_a);
 		idx_a++;
 	}
@@ -197,12 +210,13 @@ void	optimize_int(t_move *move)
 	}
 	else
 		move->r = 0;
-	move->total_cost = ft_abs(move->a_cost) + ft_abs(move->b_cost) + ft_abs(move->r);
+	move->total_cost = ft_abs(move->a_cost) + ft_abs(move->b_cost)
+		+ ft_abs(move->r);
 }
 
 void	update_cnt(t_move *tmp, t_move *best_move)
 {
-	static int total = INT_MAX;
+	static int	total = INT_MAX;
 
 	if (tmp->b_cost == 0)
 		total = INT_MAX;
@@ -216,9 +230,10 @@ void	update_cnt(t_move *tmp, t_move *best_move)
 
 void	calculate_move(t_DList *a_stack, t_DList *b_stack, t_move *move)
 {
-	int		idx_b = 0;
+	int		idx_b;
 	t_move	tmp_move;
 
+	idx_b = 0;
 	while (idx_b < b_stack->size)
 	{
 		tmp_move.a_cost = find_insert_position(a_stack, b_stack, idx_b);
@@ -232,11 +247,16 @@ void	calculate_move(t_DList *a_stack, t_DList *b_stack, t_move *move)
 }
 void	check(t_DList *a_stack)
 {
-	t_DNode *current = a_stack->head;
-	int min_value = current->value;
-	int min_index = 0;
-	int i = 0;
+	t_DNode	*current;
+	int		min_value;
+	int		min_index;
+	int		i;
+	int		rra_count;
 
+	current = a_stack->head;
+	min_value = current->value;
+	min_index = 0;
+	i = 0;
 	while (current)
 	{
 		if (current->value < min_value)
@@ -254,12 +274,11 @@ void	check(t_DList *a_stack)
 	}
 	else
 	{
-		int rra_count = a_stack->size - min_index;
+		rra_count = a_stack->size - min_index;
 		while (rra_count-- > 0)
 			ft_rra(a_stack);
 	}
 }
-
 
 void	dealing_more_than_seven(t_DList *a_stack, t_DList *b_stack, int *number)
 {
@@ -269,5 +288,4 @@ void	dealing_more_than_seven(t_DList *a_stack, t_DList *b_stack, int *number)
 	push_b_to_a(a_stack, b_stack);
 	check(a_stack);
 	test(a_stack, 0);
-
 }

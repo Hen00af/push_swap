@@ -6,7 +6,7 @@
 /*   By: shattori <shattori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 06:09:33 by shattori          #+#    #+#             */
-/*   Updated: 2025/04/14 17:02:50 by shattori         ###   ########.fr       */
+/*   Updated: 2025/04/20 21:00:04 by shattori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,12 @@
 t_DNode	*take_pivot(t_DList *stack)
 {
 	int		pivot_value;
-	int size;
-	int i;
+	int		size;
+	int		i;
 	t_DNode	*tmp;
-	
-	if(stack->size <= 0)
-	return NULL;
 
+	if (stack->size <= 0)
+		return (NULL);
 	i = 0;
 	size = stack->size / 2;
 	tmp = stack->head;
@@ -38,10 +37,8 @@ t_DNode	*take_pivot(t_DList *stack)
 void	push_swap(t_DList *a_stack, t_DList *b_stack, int *number,
 		int number_arg)
 {
-	if (search_are_they_sorted(a_stack, b_stack) == 0)
-		return ;
 	if (number_arg == 2)
-		dealing2(a_stack, b_stack, number);
+		dealing2(a_stack);
 	else if (number_arg == 3)
 		dealing3(a_stack, b_stack);
 	else if (number_arg == 4)
@@ -51,5 +48,9 @@ void	push_swap(t_DList *a_stack, t_DList *b_stack, int *number,
 	else if (number_arg == 6)
 		dealing6(a_stack, b_stack, number);
 	else
+	{
+		if (search_are_they_sorted(a_stack, b_stack) == 0)
+			return ;
 		dealing_more_than_seven(a_stack, b_stack, number);
+	}
 }
