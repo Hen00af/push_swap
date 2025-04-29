@@ -40,10 +40,7 @@ int	*search_same_number_and_coodinate_compression(int argc, char **argv)
 		{
 			if (tmp[i] == tmp[j] && i != j)
 			{
-				printf("===================Error===================\n");
-				printf("===== Please write different numbers =====\n");
-				printf("===========================================\n");
-				exit(1);
+				exit_with_error("===== Please write different numbers =====");
 			}
 			j++;
 		}

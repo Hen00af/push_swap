@@ -35,9 +35,15 @@ void initialize_stack(t_DList *a_stack,t_Dlist *b_stack)
 	a_stack = ft_initialize_stack();
 	b_stack = ft_initialize_stack();
 }
-void free_list(t_DList *a_stack,t_Dlist *b_stack)
+
+void free_all(t_DList *a_stack,t_Dlist *b_stack,int *number)
 {
-	
+	if(a_stack)
+		ft_free_list(a_stack);
+	if(b_stack)
+		ft_free_list(b_stack);
+	if(number)
+		free(number);
 }
 
 int	main(int argc, char **argv)
@@ -49,8 +55,6 @@ int	main(int argc, char **argv)
 	number = error_handling_and_coodinate_compression(argc - 1, argv + 1);
 	populate_node_from_args(a_stack, argc, number);
 	push_swap(a_stack, b_stack, number, argc - 1) ;
-	ft_free_list(a_stack);
-	ft_free_list(b_stack);
-	free(number);
+	free_all(a_stack,b_stack,number);
 	return (0);
 }
