@@ -43,7 +43,7 @@ int	search_are_they_sorted(t_DList *a_stack, t_DList *b_stack);
 t_DNode	*take_pivot(t_DList *stack);
 void	push_swap(t_DList *a_stack, t_DList *b_stack, int *number,
 		int number_arg);
-void	dealing2(t_DList *a_stack);
+void	dealing2(t_DList *a_stak);
 void	dealing3(t_DList *a_stack, t_DList *b_stack);
 void	dealing4(t_DList *a_stack, t_DList *b_stack, int *number);
 void	dealing5(t_DList *a_stack, t_DList *b_stack, int *number);
@@ -56,8 +56,11 @@ void	quick_sort_a(t_DList *a, t_DList *b);
 void	quick_sort_b(t_DList *a, t_DList *b);
 t_DNode	*locate_node(t_DList *stack, int idx);
 void	dealing(int *tmp, int size, int *sorted);
-
 int	head_value(t_DList *stack);
+
+/***********************FOR_ERROR***********************/
+void exit_with_error(const char *message);
+
 /*--------------------OPERATIONS----------------------*/
 void	ft_pa(t_DList *a_stack, t_DList *b_stack);
 void	ft_pb(t_DList *a_stack, t_DList *b_stack);
