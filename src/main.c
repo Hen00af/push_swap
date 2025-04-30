@@ -15,13 +15,14 @@
 
 #include <push_swap.h>
 
-
 void	populate_node_from_args(t_DList *a_stack, int argc, int *number)
 {
 	int i;
 	int value;
-	if (!a_stack)
-		exit(1);
+	// if (!a_stack){
+	// 	printf("nothing args\n");
+	// 	exit(1);
+	// }
 	i = 0;
 	while (i < argc - 1)
 	{
@@ -45,21 +46,23 @@ void free_all(t_DList *a_stack,t_DList *b_stack,int *number)
 	if(number)
 		free(number);
 }
-void search_num_of_args(int argc)
+
+void check_args(int argc)
 {
-	if (argc < 2)
-	{
-		exit_with_error("=Please write more than 2 numbers=");
-	}
+	if (argc < 3)
+		exit_with_error("===Please write more than 2 numbers===");
 }
+
 int	main(int argc, char **argv)
 {
 	t_DList *a_stack;
 	t_DList *b_stack;
 	int *number;
 
-	search_num_of_args(argc);
-	number = error_handling_and_coodinate_compression(argc - 1, argv + 1);
+	check_args(argc);
+	number = search_same_number_and_coodinate_compression(argc,argv);
+	printf("%d",number[1]);
+	initialize_stack(a_stack,b_stack);
 	populate_node_from_args(a_stack, argc, number);
 	push_swap(a_stack, b_stack, number, argc - 1) ;
 	free_all(a_stack,b_stack,number);

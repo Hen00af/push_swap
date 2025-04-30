@@ -57,6 +57,7 @@ void	quick_sort_b(t_DList *a, t_DList *b);
 t_DNode	*locate_node(t_DList *stack, int idx);
 void	dealing(int *tmp, int size, int *sorted);
 int	head_value(t_DList *stack);
+int	*search_same_number_and_coodinate_compression(int argc, char **argv);
 
 /***********************FOR_ERROR***********************/
 void exit_with_error(const char *message);

@@ -12,24 +12,34 @@
 
 #include "push_swap.h"
 
+int binary_search(int *arr,int size,int target)
+{
+	int left;
+	int right;
+	int mid;
+
+	left=0;
+	right = size - 1;
+	while(left <= right)
+	{
+		mid = (left + right) / 2;
+		if(arr[mid] == target)
+			return(mid);
+		else if(arr[mid] < target)
+			left = mid + 1;
+		else
+		right = mid - 1;
+	}
+	return(-1);
+}
+
 void	dealing(int *tmp, int size, int *sorted)
 {
-	int	i;
-	int	j;
-
+	int i;
 	i = 0;
-	while (i < size)
+	while(i < size)
 	{
-		j = 0;
-		while (j < size)
-		{
-			if (tmp[i] == sorted[j])
-			{
-				tmp[i] = j;
-				break ;
-			}
-			j++;
-		}
+		tmp[i] = binary_search(sorted,size,tmp[i]);
 		i++;
 	}
 }
@@ -49,7 +59,6 @@ void	ft_coordinate_compression(int *tmp, int size)
 		i++;
 	}
 	ft_qsort(sorted, size, sizeof(int), ft_compare_int);
-	i = 0;
 	dealing(tmp, size, sorted);
 	free(sorted);
 }

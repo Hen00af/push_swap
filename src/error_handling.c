@@ -15,8 +15,6 @@
 
 #include <push_swap.h>
 
-
-
 void	check_for_duplicates(int *tmp, int argc)
 {
     int	i;
@@ -28,13 +26,16 @@ void	check_for_duplicates(int *tmp, int argc)
         j = i + 1;
         while (j < argc)
         {
-            if (tmp[i] == tmp[j])
+            if (tmp[i] == tmp[j]){
                 exit_with_error("===== Please write different numbers =====");
+				free(tmp);
+			}
             j++;
         }
         i++;
     }
 }
+
 int	*search_same_number_and_coodinate_compression(int argc, char **argv)
 {
 	int i;
@@ -46,18 +47,13 @@ int	*search_same_number_and_coodinate_compression(int argc, char **argv)
 	tmp = malloc(sizeof(int) * (argc));
 	if (!tmp)
 		exit(1);
-	while (i < argc)
+	while (i < argc - 1)
 	{
-		tmp[i] = ft_atoi(argv[i]);
+		tmp[i] = ft_atoi(argv[i + 1]);
 		i++;
 	}
 	i = 0;
 	check_for_duplicates(tmp,argc);
 	ft_coordinate_compression(tmp, i);
 	return (tmp);
-}
-
-int	*error_handling_and_coodinate_compression(int argc, char **argv)
-{
-	return (search_same_number_and_coodinate_compression(argc, argv));
 }
