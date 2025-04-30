@@ -50,6 +50,7 @@ void	dealing5(t_DList *a_stack, t_DList *b_stack, int *number);
 void	dealing6(t_DList *a_stack, t_DList *b_stack, int *number);
 void	dealing_more_than_seven(t_DList *a_stack, t_DList *b_stack,
 		int *number);
+void	populate_stack_from_args(t_DList *a_stack, int argc, int *number);
 void	push_smaller_than_pivot(t_DList *a_stack, t_DList *b_stack,
 		t_DNode *pivot);
 void	quick_sort_a(t_DList *a, t_DList *b);

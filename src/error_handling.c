@@ -39,21 +39,20 @@ void	check_for_duplicates(int *tmp, int argc)
 int	*search_same_number_and_coodinate_compression(int argc, char **argv)
 {
 	int i;
-	int j;
+	int size;
 	int *tmp;
 
 	i = 0;
-	j = 0;
+	size = argc - 1;
 	tmp = malloc(sizeof(int) * (argc));
 	if (!tmp)
 		exit(1);
-	while (i < argc - 1)
+	while (i < size)
 	{
 		tmp[i] = ft_atoi(argv[i + 1]);
 		i++;
 	}
-	i = 0;
-	check_for_duplicates(tmp,argc);
+	check_for_duplicates(tmp,size);
 	ft_coordinate_compression(tmp, i);
 	return (tmp);
 }

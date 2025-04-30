@@ -50,8 +50,10 @@ void	ft_coordinate_compression(int *tmp, int size)
 	int	*sorted;
 
 	sorted = malloc(sizeof(int) * (size));
-	if (!sorted)
+	if (!sorted){
+		ft_perror("failed malloc");
 		exit(1);
+	}
 	i = 0;
 	while (i < size)
 	{

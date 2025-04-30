@@ -15,26 +15,27 @@
 
 #include <push_swap.h>
 
-void	populate_node_from_args(t_DList *a_stack, int argc, int *number)
+void	populate_stack_from_args(t_DList *a_stack, int count, int *numbers)
 {
 	int i;
-	int value;
-	// if (!a_stack){
-	// 	printf("nothing args\n");
-	// 	exit(1);
-	// }
-	i = 0;
-	while (i < argc - 1)
+
+	if (!a_stack)
 	{
-		ft_add_back(a_stack, number[i]);
+		ft_perror("Error: stack not initialized\n");
+		exit(1);
+	}
+	i = 0;
+	while (i < count)
+	{
+		ft_add_back(a_stack, numbers[i]);
 		i++;
 	}
 }
 
-void initialize_stack(t_DList *a_stack,t_DList *b_stack)
+void initialize_stack(t_DList **a_stack,t_DList **b_stack)
 {
-	a_stack = ft_initialize_stack();
-	b_stack = ft_initialize_stack();
+	*a_stack = ft_initialize_stack();
+	*b_stack = ft_initialize_stack();
 }
 
 void free_all(t_DList *a_stack,t_DList *b_stack,int *number)
@@ -61,9 +62,8 @@ int	main(int argc, char **argv)
 
 	check_args(argc);
 	number = search_same_number_and_coodinate_compression(argc,argv);
-	printf("%d",number[1]);
-	initialize_stack(a_stack,b_stack);
-	populate_node_from_args(a_stack, argc, number);
+	initialize_stack(&a_stack,&b_stack);
+	populate_stack_from_args(a_stack, argc - 1, number);
 	push_swap(a_stack, b_stack, number, argc - 1) ;
 	free_all(a_stack,b_stack,number);
 	return (0);
