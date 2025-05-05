@@ -15,6 +15,7 @@ SRCS = $(addprefix $(SRCS_DIR),\
 		push_swap.c\
 		dealing2to5.c\
 		utils.c\
+		utils2.c\
 		for_exit.c)
 OBJS =  $(SRCS:.c=.o)
 all: $(NAME) clean

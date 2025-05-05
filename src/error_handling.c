@@ -16,48 +16,56 @@
 #include <push_swap.h>
 
 
-
-void	check_for_duplicates(int *tmp, int argc)
-{
-    int	i;
-    int	j;
-
-    i = 0;
-    while (i < argc)
-    {
-        j = i + 1;
-        while (j < argc)
-        {
-            if (tmp[i] == tmp[j])
-                exit_with_error("===== Please write different numbers =====");
-            j++;
-        }
-        i++;
-    }
-}
-int	*search_same_number_and_coodinate_compression(int argc, char **argv)
+void	search_same_number(int argc, int *tmp)
 {
 	int i;
 	int j;
-	int *tmp;
 
 	i = 0;
 	j = 0;
+	while (i < argc)
+	{
+		j = i + 1;
+		while (j < argc)
+		{
+			if (tmp[i] == tmp[j] && i != j)
+			{
+				printf("===================Error===================\n");
+				printf("===== Please write different numbers =====\n");
+				printf("===========================================\n");
+				free(tmp);
+				exit(1);
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+int	*search_same_number_and_coodinate_compression(int argc, char **argv)
+{
+	int i;
+	int *tmp;
+
+	i = -1;
 	tmp = malloc(sizeof(int) * (argc));
 	if (!tmp)
 		exit(1);
-	while (i < argc)
-	{
+	while (++i < argc)
 		tmp[i] = ft_atoi(argv[i]);
-		i++;
-	}
-	i = 0;
-	check_for_duplicates(tmp,argc);
-	ft_coordinate_compression(tmp, i);
+	search_same_number(argc, tmp);
+	ft_coordinate_compression(tmp, argc);
 	return (tmp);
 }
 
 int	*error_handling_and_coodinate_compression(int argc, char **argv)
 {
+	if (argc < 2)
+	{
+		printf("===================Error===================\n");
+		printf("==== Please write more than 2 numbers ====\n");
+		printf("===========================================\n");
+		exit(1);
+	}
 	return (search_same_number_and_coodinate_compression(argc, argv));
 }

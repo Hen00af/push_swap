@@ -6,7 +6,7 @@
 /*   By: shattori <shattori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 05:51:49 by shattori          #+#    #+#             */
-/*   Updated: 2025/04/20 20:36:52 by shattori         ###   ########.fr       */
+/*   Updated: 2025/04/24 07:44:56 by shattori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,26 +23,12 @@ int	search_are_they_sorted(t_DList *a_stack, t_DList *b_stack)
 {
 	t_DNode	*current;
 
-	current = a_stack->head;
-	while (current && current->next)
-	{
-		if (current->value > current->next->value)
-			return (1);
-		current = current->next;
-	}
-	current = b_stack->head;
-	while (current && current->next)
-	{
-		if (current->value > current->next->value)
-			return (1);
-		current = current->next;
-	}
-	return (0);
+	if (ft_is_sorted(a_stack))
+		return (0);
+	if (ft_is_sorted(b_stack))
+		return (0);
+	return (1);
 }
-#include "push_swap.h" // 必要に応じて自分のヘッダをインクルード
-#include <limits.h>
-#include <stdio.h>
-#include <stdlib.h>
 
 int	select_direction(int idx, int list_size)
 {
@@ -110,41 +96,131 @@ int	find_nth_max(t_DList *stack, int n)
 	return (result);
 }
 
-void	push_a_to_b(t_DList *a_stack, t_DList *b_stack)
+int	ft_case_rarb(t_DList *a_stack, t_DList *b_stack, int c)
 {
 	int	i;
-	int	push_count;
-	int	a_val;
-	int	max;
+
+	i = ft_find_place_a(a_stack, c);
+	if (i < ft_find_index(a_stack, b_stack))
+		i = ft_find_index(a_stack, b_stack);
+	return (i);
+}
+
+int	ft_case_rrarrb(t_DList *a, t_DList *b, int c)
+{
+	int	i;
 
 	i = 0;
-	push_count = 0;
-	while (a_stack->size > 3)
+	if (ft_find_place_b(b, c))
+		i = ft_lstsize(b) - ft_find_place_b(b, c);
+	if ((i < (ft_lstsize(a) - ft_find_index(a, c))) && ft_find_index(a, c))
+		i = ft_lstsize(a) - ft_find_index(a, c);
+	return (i);
+}
+
+void	ft_case_rrarrb(t_DList *a, t_DList *b, int c)
+{
+	int	i;
+
+	i = 0;
+	if (ft_find_place_b(a, c))
+		i = ft_lstsize(b) - ft_find_place_b(a, c);
+	i = ft_find_index(b, c) + i;
+	return (i);
+}
+// culculate how can i move b to a most efficiently
+int	ft_calculate_b_to_a(t_DList *a_stack, t_DList *b_stack)
+{
+	int		i;
+	t_DNode	*tmp;
+	int		val;
+
+	tmp = a_stack->head;
+	i = ft_case_rrarrb(a_stack, b_stack, tmp->value);
+	while (tmp)
 	{
-		max = find_nth_max(a_stack, i);
-		a_val = head_value(a_stack);
-		if (max == a_val)
+		val = tmp->value;
+		if (i > ft_case_rarb(a_stack, b_stack, val))
+			i = ft_case_rarb(a_stack, b_stack, val);
+		if (i > ft_case_rrarrb(a_stack, b_stack, val))
+			i = ft_case_rrarrb(a_stack, b_stack, val);
+		if (i > ft_case_rarrb(a_stack, b_stack, val))
+			i = ft_case_rarrb(a_stack, b_stack, val);
+		if (i > ft_case_rrarb(a_stack, b_stack, val))
+			i = ft_case_rrarb(a_stack, b_stack, val);
+		tmp = tmp->next;
+	}
+	return (i);
+}
+// calculate how can i move a to b most efficiently
+int	ft_calculate_a_to_b(t_DList *a_stack, t_DList *b_stack)
+{
+	int		i;
+	t_DNode	*tmp;
+	int		val;
+
+	tmp = a_stack->head;
+	i = ft_case_rrarrb(a_stack, b_stack, tmp->value);
+	while (tmp)
+	{
+		val = tmp->value;
+		if (i > ft_case_rarb(a_stack, b_stack, val))
+			i = ft_case_rarb(a_stack, b_stack, val);
+		if (i > ft_case_rrarrb(a_stack, b_stack, val))
+			i = ft_case_rrarrb(a_stack, b_stack, val);
+		if (i > ft_case_rarrb(a_stack, b_stack, val))
+			i = ft_case_rarrb(a_stack, b_stack, val);
+		if (i > ft_case_rrarb(a_stack, b_stack, val))
+			i = ft_case_rrarb(a_stack, b_stack, val);
+		tmp = tmp->next;
+	}
+	return (i);
+}
+
+void	pb_untill_3(t_DList *a_stack, t_DList *b_stack)
+{
+	int		i;
+	t_DList	*tmp;
+
+	while (ft_lstsize(a_stack) > 3 && !ft_is_sorted(a_stack))
+	{
+		tmp = a_stack;
+		i = ft_calculate_a_to_b(a_stack, b_stack);
+		while(i >= 0)
 		{
-			ft_ra(a_stack);
-			i++;
-		}
-		else
-		{
-			ft_pb(a_stack, b_stack);
-			push_count++;
+			if(i == ft_case_rarb(a_stack,b_stack,head_value(tmp)))
+				i = ft_apply_rarb(a_stack, b_stack);
 		}
 	}
-	// printf("push_a_to_b\n");
-	test(a_stack, 1);
-	test(b_stack, 1);
+}
+
+t_DList	*push_a_to_b(t_DList *a_stack, t_DList *b_stack, int *number)
+{
+	if (!ft_is_sorted(a_stack))
+		ft_pb(a_stack, b_stack);
+	if (ft_lstsize(a_stack) > 3 && !ft_is_sorted(a_stack))
+		ft_pb(a_stack, b_stack);
+	if (ft_lstsize(a_stack) > 3 && !ft_is_sorted(a_stack))
+		pb_untill_3(a_stack, b_stack);
+	if (ft_is_sorted(a_stack))
+		dealing3(a_stack, b_stack);
+	return (b_stack);
+}
+
+t_DList **ft_sort_a(t_DList *a_stack, t_DList *stack_b)
+{
+	
 }
 
 void	push_b_to_a(t_DList *a_stack, t_DList *b_stack)
 {
-	t_move	best_move;
+	int i;
+	t_DList *tmp;
 
 	while (b_stack->size)
 	{
+		tmp = b_stack->head;
+		i =ft_rotate_type_ba();
 		calculate_move(a_stack, b_stack, &best_move);
 		execute_move(a_stack, b_stack, &best_move);
 		ft_pa(a_stack, b_stack);
@@ -245,6 +321,7 @@ void	calculate_move(t_DList *a_stack, t_DList *b_stack, t_move *move)
 		idx_b++;
 	}
 }
+
 void	check(t_DList *a_stack)
 {
 	t_DNode	*current;
@@ -282,10 +359,8 @@ void	check(t_DList *a_stack)
 
 void	dealing_more_than_seven(t_DList *a_stack, t_DList *b_stack, int *number)
 {
-	push_a_to_b(a_stack, b_stack);
-	test(b_stack, 1);
+	push_a_to_b(a_stack, b_stack, number);
 	dealing3(a_stack, b_stack);
 	push_b_to_a(a_stack, b_stack);
 	check(a_stack);
-	test(a_stack, 0);
 }

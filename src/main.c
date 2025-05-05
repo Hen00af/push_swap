@@ -30,38 +30,31 @@ void	populate_node_from_args(t_DList *a_stack, int argc, int *number)
 	}
 }
 
-void initialize_stack(t_DList *a_stack,t_DList *b_stack)
+void	initialize_stacks(t_DList **a_stack, t_DList **b_stack)
 {
-	a_stack = ft_initialize_stack();
-	b_stack = ft_initialize_stack();
+	*a_stack = ft_initialize_stack();
+	*b_stack = ft_initialize_stack();
 }
 
-void free_all(t_DList *a_stack,t_DList *b_stack,int *number)
+void	free_stacks(t_DList *a_stack, t_DList *b_stack, int *number)
 {
-	if(a_stack)
-		ft_free_list(a_stack);
-	if(b_stack)
-		ft_free_list(b_stack);
-	if(number)
-		free(number);
-}
-void search_num_of_args(int argc)
-{
-	if (argc < 2)
-	{
-		exit_with_error("=Please write more than 2 numbers=");
-	}
+	ft_free_list(a_stack);
+	ft_free_list(b_stack);
+	free(number);
 }
 int	main(int argc, char **argv)
 {
 	t_DList *a_stack;
 	t_DList *b_stack;
+	t_DNode *current;
 	int *number;
+	int i;
 
-	search_num_of_args(argc);
+	i = 0;
 	number = error_handling_and_coodinate_compression(argc - 1, argv + 1);
+	initialize_stacks(&a_stack, &b_stack);
 	populate_node_from_args(a_stack, argc, number);
-	push_swap(a_stack, b_stack, number, argc - 1) ;
-	free_all(a_stack,b_stack,number);
+	push_swap(a_stack, b_stack, number, argc - 1);
+	free_stacks(a_stack, b_stack, number);
 	return (0);
 }

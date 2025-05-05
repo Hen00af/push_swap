@@ -6,32 +6,46 @@
 /*   By: shattori <shattori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 16:36:22 by shattori          #+#    #+#             */
-/*   Updated: 2025/04/15 14:26:44 by shattori         ###   ########.fr       */
+/*   Updated: 2025/04/22 12:15:01 by shattori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_max(int i, int j)
+int	ft_max(t_DList *a)
 {
-	if (i < j)
-		return (j);
-	else
-		return (i);
+	int	i;
+
+	i = a->head->value;
+	while (a)
+	{
+		if (a->head->value > i)
+			i = a->head->value;
+		a = a->head->next;
+	}
+	return (i);
 }
-int	ft_min(int i, int j)
+
+int	ft_min(t_DList *a)
 {
-	if (i < j)
-		return (i);
-	else
-		return (j);
+	int		i;
+
+	i = a->head->value;
+	while (a)
+	{
+		if (a->head->value < i)
+			i = a->head->value;
+		a = a->head->next;
+	}
+	return (i);
 }
-int ft_abs(int num)
+
+int	ft_abs(int num)
 {
-    if(num < 0)
-        return(-1*num);
-    else
-        return(num);
+	if (num < 0)
+		return (-1 * num);
+	else
+		return (num);
 }
 
 int	head_value(t_DList *stack)
@@ -39,11 +53,12 @@ int	head_value(t_DList *stack)
 	if (!stack || !stack->head)
 	{
 		fprintf(stderr, "Error: empty stack access\n");
-		exit(EXIT_FAILURE); 
+		exit(EXIT_FAILURE);
 	}
 	return (stack->head->value);
 }
-int tail_value(t_DList *stack)
+
+int	tail_value(t_DList *stack)
 {
 	if (!stack || !stack->head)
 	{

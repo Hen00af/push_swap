@@ -6,7 +6,7 @@
 /*   By: shattori <shattori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 04:57:16 by shattori          #+#    #+#             */
-/*   Updated: 2025/04/05 05:04:04 by shattori         ###   ########.fr       */
+/*   Updated: 2025/04/20 22:26:51 by shattori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,16 @@
 
 void	dealing(int *tmp, int size, int *sorted)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < size)
+	for (int i = 0; i < size; i++)
 	{
-		j = 0;
-		while (j < size)
+		for (int j = 0; j < size; j++)
 		{
 			if (tmp[i] == sorted[j])
 			{
 				tmp[i] = j;
 				break ;
 			}
-			j++;
 		}
-		i++;
 	}
 }
 
