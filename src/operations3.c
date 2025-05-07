@@ -19,44 +19,43 @@ void	ft_rrr(t_DList *a_stack, t_DList *b_stack)
 	ft_putstr_fd("rrr\n", 1);
 }
 
-static void	radix_sort_stack_b(t_stacks *s, int b_size, int bit_size, int j)
+static void radix_sort_stack_b(t_DList *a_stack, t_DList *b_stack, int j)
 {
-	while (b_size-- && j <= bit_size && !is_array_sorted(s))
-	{
-		if (((s->b[0] >> j) & 1) == 0)
-			rotate(s->b, s->b_size, "up", "b");
-		else
-			push("pa", s);
-	}
-	if (is_array_sorted(s))
-		while (s->b_size != 0)
-			push("pa", s);
-}
+	int b_size = b_stack->size;
 
+	while (b_size-- > 0)
+	{
+		int val = b_stack->head->value;
+		if (((val >> j) & 1) == 0)
+			ft_rb(b_stack);
+		else
+			ft_pa(a_stack, b_stack); 
+	}
+	while (b_stack->size > 0)
+		ft_pa(a_stack, b_stack);
+}
 void dealing_more_than_seven(t_DList *a_stack, t_DList *b_stack, int *number)
 {
-	int j ;
-	int bit_size ;
-	int size ;
-	t_DNode *node;
+	int j = 0;
+	int bit_size = 0;
+	int size = a_stack->size;
 
-	bit_size = 0;
-	size = a_stack->size;
-	node = a_stack -> head;
-	while (size > 1 && ++bit_size)
-		size /= 2;
-	j = 0;
+	printf("1\n");
+	while ((size - 1) >> bit_size)
+		bit_size++;
+
 	while (j < bit_size)
 	{
 		size = a_stack->size;
-		while (size-- && !ft_is_sorted(a_stack))
+		while (size--)
 		{
-			if(((node->value >> j) & 1) == 0 )
-			ft_pb(a_stack,b_stack);
+			int val = a_stack->head->value;
+			if (((val >> j) & 1) == 0)
+				ft_pb(a_stack, b_stack);
 			else
-			ft_rb(a_stack);
+				ft_ra(a_stack);
 		}
-		radix_sort_stack_b(a_stack, b_stack, bit_size, j + 1);
+		radix_sort_stack_b(a_stack, b_stack, j);
 		j++;
 	}
 }

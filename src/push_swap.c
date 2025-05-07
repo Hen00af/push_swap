@@ -36,7 +36,8 @@ t_DNode	*take_pivot(t_DList *stack)
 
 int	search_are_they_sorted(t_DList *a_stack, t_DList *b_stack)
 {
-	if (ft_is_sorted(a_stack) == 0 && b_stack->size == 0)
+	printf("10\n");
+	if (ft_is_sorted(a_stack) == 0 && b_stack->size == 0 || ft_is_sorted(a_stack) ==0 && a_stack->size == 0)
 		return (1);
 	return (0);
 }
@@ -52,8 +53,8 @@ void	push_swap(t_DList *a_stack, t_DList *b_stack, int *number,
 		dealing4(a_stack, b_stack, number,4);
 	else
 	{
-		if (search_are_they_sorted(a_stack, b_stack))
-			return ;
+		// if (search_are_they_sorted(a_stack, b_stack))
+		// 	return ;
 		dealing_more_than_seven(a_stack, b_stack, number);
 	}
 

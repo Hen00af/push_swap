@@ -55,7 +55,6 @@ int *search_same_number_and_coordinate_compression(int argc, char **argv)
     }
 	while (i < argc - 1) {
 		tmp[i] = ft_atoi(argv[i + 1]);
-		printf("after atoi: %d\n", tmp[i]);
 		i++;
 	}
     search_same_number(argc - 1, tmp);

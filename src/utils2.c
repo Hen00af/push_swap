@@ -20,8 +20,8 @@ int	ft_is_sorted(t_DList *stack)
 	while (current && current->next)
 	{
 		if (current->value > current->next->value)
-			return (1);
+			return (0);
 		current = current->next;
 	}
-	return (0);
+	return (1);
 }
