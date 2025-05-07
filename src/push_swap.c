@@ -50,14 +50,11 @@ void	push_swap(t_DList *a_stack, t_DList *b_stack, int *number,
 		dealing3(a_stack);
 	else if (number_arg == 4)
 		dealing4(a_stack, b_stack, number,4);
-	// else if (number_arg == 5)
-	// 	dealing5(a_stack, b_stack, number);
-	// else if (number_arg == 6)
-	// 	dealing6(a_stack, b_stack);
-	// else
-	// {
-	// 	if (search_are_they_sorted(a_stack, b_stack))
-	// 		return ;
-	// 	dealing_more_than_seven(a_stack, b_stack, number);
-	// }
+	else
+	{
+		if (search_are_they_sorted(a_stack, b_stack))
+			return ;
+		dealing_more_than_seven(a_stack, b_stack, number);
+	}
+
 }
