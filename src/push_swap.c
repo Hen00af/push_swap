@@ -34,23 +34,30 @@ t_DNode	*take_pivot(t_DList *stack)
 	return (tmp);
 }
 
+int	search_are_they_sorted(t_DList *a_stack, t_DList *b_stack)
+{
+	if (ft_is_sorted(a_stack) == 0 && b_stack->size == 0)
+		return (1);
+	return (0);
+}
+
 void	push_swap(t_DList *a_stack, t_DList *b_stack, int *number,
 		int number_arg)
 {
 	if (number_arg == 2)
 		dealing2(a_stack);
 	else if (number_arg == 3)
-		dealing3(a_stack, b_stack);
+		dealing3(a_stack);
 	else if (number_arg == 4)
-		dealing4(a_stack, b_stack, number, 0);
-	else if (number_arg == 5)
-		dealing5(a_stack, b_stack, number);
-	else if (number_arg == 6)
-		dealing6(a_stack, b_stack, number);
-	else
-	{
-		if (search_are_they_sorted(a_stack, b_stack))
-			return ;
-		dealing_more_than_seven(a_stack, b_stack, number);
-	}
+		dealing4(a_stack, b_stack, number,4);
+	// else if (number_arg == 5)
+	// 	dealing5(a_stack, b_stack, number);
+	// else if (number_arg == 6)
+	// 	dealing6(a_stack, b_stack);
+	// else
+	// {
+	// 	if (search_are_they_sorted(a_stack, b_stack))
+	// 		return ;
+	// 	dealing_more_than_seven(a_stack, b_stack, number);
+	// }
 }

@@ -6,35 +6,41 @@
 /*   By: shattori <shattori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 04:57:16 by shattori          #+#    #+#             */
-/*   Updated: 2025/04/20 22:26:51 by shattori         ###   ########.fr       */
+/*   Updated: 2025/05/03 01:39:14 by shattori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	dealing(int *tmp, int size, int *sorted)
+void dealing(int *tmp, int size, int *sorted)
 {
-	for (int i = 0; i < size; i++)
-	{
-		for (int j = 0; j < size; j++)
-		{
-			if (tmp[i] == sorted[j])
-			{
-				tmp[i] = j;
-				break ;
-			}
-		}
-	}
+    int i = 0;
+    int j;
+
+    while (i < size)
+    {
+        j = 0;
+        while (j < size)
+        {
+            if (tmp[i] == sorted[j])
+            {
+                tmp[i] = j;
+                break;
+            }
+            j++;
+        }
+        i++;
+    }
 }
 
-void	ft_coordinate_compression(int *tmp, int size)
+void	ft_coordinate_compression(int size,int *tmp )
 {
 	int	i;
 	int	*sorted;
 
 	sorted = malloc(sizeof(int) * (size));
 	if (!sorted)
-		exit(1);
+		ft_exit(NULL, NULL, NO_ERROR);
 	i = 0;
 	while (i < size)
 	{

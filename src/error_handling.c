@@ -15,7 +15,6 @@
 
 #include <push_swap.h>
 
-
 void	search_same_number(int argc, int *tmp)
 {
 	int i;
@@ -42,30 +41,24 @@ void	search_same_number(int argc, int *tmp)
 	}
 }
 
-int	*search_same_number_and_coodinate_compression(int argc, char **argv)
+int *search_same_number_and_coordinate_compression(int argc, char **argv)
 {
-	int i;
-	int *tmp;
+    int i;
+    int *tmp;
 
-	i = -1;
-	tmp = malloc(sizeof(int) * (argc));
-	if (!tmp)
-		exit(1);
-	while (++i < argc)
-		tmp[i] = ft_atoi(argv[i]);
-	search_same_number(argc, tmp);
-	ft_coordinate_compression(tmp, argc);
-	return (tmp);
-}
-
-int	*error_handling_and_coodinate_compression(int argc, char **argv)
-{
-	if (argc < 2)
-	{
-		printf("===================Error===================\n");
-		printf("==== Please write more than 2 numbers ====\n");
-		printf("===========================================\n");
-		exit(1);
+    i = 0;
+    tmp = malloc(sizeof(int) * argc);
+    if (!tmp)
+    {
+        perror("Memory allocation failed");
+        return NULL;  
+    }
+	while (i < argc - 1) {
+		tmp[i] = ft_atoi(argv[i + 1]);
+		printf("after atoi: %d\n", tmp[i]);
+		i++;
 	}
-	return (search_same_number_and_coodinate_compression(argc, argv));
+    search_same_number(argc - 1, tmp);
+    ft_coordinate_compression(argc, tmp);
+    return tmp;
 }

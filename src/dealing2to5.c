@@ -6,13 +6,13 @@
 /*   By: shattori <shattori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 06:25:27 by shattori          #+#    #+#             */
-/*   Updated: 2025/04/22 07:25:59 by shattori         ###   ########.fr       */
+/*   Updated: 2025/05/03 01:40:04 by shattori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	test(t_DList *stack, int i)
+void	test(t_DList *stack)
 {
 	t_DNode	*current;
 	int		j;
@@ -42,7 +42,7 @@ void	dealing2(t_DList *a_stack)
 		ft_sa(a_stack);
 }
 
-void	dealing3(t_DList *a_stack, t_DList *b_stack)
+void	dealing3(t_DList *a_stack)
 {
 	t_DNode	*cur;
 	int		a;
@@ -69,8 +69,6 @@ void	dealing3(t_DList *a_stack, t_DList *b_stack)
 		ft_sa(a_stack);
 		ft_rra(a_stack);
 	}
-	// printf("\ndealing3\n");
-	// test(a_stack, 0);
 }
 
 void	dealing4(t_DList *a_stack, t_DList *b_stack, int *number, int x)
@@ -82,7 +80,7 @@ void	dealing4(t_DList *a_stack, t_DList *b_stack, int *number, int x)
 		while (head_value(a_stack) != x)
 			ft_rra(a_stack);
 	ft_pb(a_stack, b_stack);
-	dealing3(a_stack, b_stack);
+	dealing3(a_stack);
 	ft_pa(a_stack, b_stack);
 }
 
@@ -97,12 +95,12 @@ void	dealing5(t_DList *a_stack, t_DList *b_stack, int *number)
 	ft_pb(a_stack, b_stack);
 	// test(a_stack,1);
 	dealing4(a_stack, b_stack, number, 1);
-	dealing3(a_stack, b_stack);
+	dealing3(a_stack);
 	ft_pa(a_stack, b_stack);
 	ft_pa(a_stack, b_stack);
 }
 
-void	dealing6(t_DList *a_stack, t_DList *b_stack, int *number)
+void	dealing6(t_DList *a_stack, t_DList *b_stack)
 {
 	while (head_value(a_stack) != 0)
 		ft_ra(a_stack);
@@ -113,7 +111,7 @@ void	dealing6(t_DList *a_stack, t_DList *b_stack, int *number)
 	while (head_value(a_stack) != 2)
 		ft_ra(a_stack);
 	ft_pb(a_stack, b_stack);
-	dealing3(a_stack, b_stack);
+	dealing3(a_stack);
 	ft_pa(a_stack, b_stack);
 	ft_pa(a_stack, b_stack);
 	ft_pa(a_stack, b_stack);

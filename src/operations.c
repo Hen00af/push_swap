@@ -6,7 +6,7 @@
 /*   By: shattori <shattori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 05:18:22 by shattori          #+#    #+#             */
-/*   Updated: 2025/04/12 16:52:43 by shattori         ###   ########.fr       */
+/*   Updated: 2025/04/28 08:45:27 by shattori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	ft_pa(t_DList *a_stack, t_DList *b_stack)
 	b_stack->size--;
 	ft_putstr_fd("pa\n", 1);
 }
+
 void	ft_pb(t_DList *a_stack, t_DList *b_stack)
 {
 	t_DNode	*tmp;
