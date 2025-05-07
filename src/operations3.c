@@ -34,28 +34,29 @@ static void radix_sort_stack_b(t_DList *a_stack, t_DList *b_stack, int j)
 	while (b_stack->size > 0)
 		ft_pa(a_stack, b_stack);
 }
+
 void dealing_more_than_seven(t_DList *a_stack, t_DList *b_stack, int *number)
 {
 	int j = 0;
 	int bit_size = 0;
 	int size = a_stack->size;
 
-	printf("1\n");
-	while ((size - 1) >> bit_size)
-		bit_size++;
-
-	while (j < bit_size)
+	// printf("1\n");
+	while (size >> ++bit_size)
+		size /= 2;
+	j = -1;
+	while (++j <= bit_size)
 	{
 		size = a_stack->size;
-		while (size--)
+		while (size--&&!ft_is_sorted(a_stack))
 		{
-			int val = a_stack->head->value;
-			if (((val >> j) & 1) == 0)
+			if (((a_stack->head->value >> j) & 1) == 0)
 				ft_pb(a_stack, b_stack);
 			else
 				ft_ra(a_stack);
 		}
-		radix_sort_stack_b(a_stack, b_stack, j);
-		j++;
+		// radix_sort_stack_b(a_stack, b_stack, j);
 	}
+	while (a_stack->size != 0)
+	ft_pb(a_stack,b_stack);
 }

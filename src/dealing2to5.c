@@ -73,6 +73,8 @@ void	dealing3(t_DList *a_stack)
 
 void	dealing4(t_DList *a_stack, t_DList *b_stack, int *number, int x)
 {
+	if(ft_is_sorted(a_stack))
+		return;
 	if (number[0] == x || number[1] == x)
 		while (head_value(a_stack) != x)
 			ft_ra(a_stack);
@@ -81,38 +83,5 @@ void	dealing4(t_DList *a_stack, t_DList *b_stack, int *number, int x)
 			ft_rra(a_stack);
 	ft_pb(a_stack, b_stack);
 	dealing3(a_stack);
-	ft_pa(a_stack, b_stack);
-}
-
-void	dealing5(t_DList *a_stack, t_DList *b_stack, int *number)
-{
-	if (number[0] == 0 || number[1] == 0)
-		while (head_value(a_stack) != 0)
-			ft_ra(a_stack);
-	else
-		while (head_value(a_stack) != 0)
-			ft_rra(a_stack);
-	ft_pb(a_stack, b_stack);
-	// test(a_stack,1);
-	dealing4(a_stack, b_stack, number, 1);
-	dealing3(a_stack);
-	ft_pa(a_stack, b_stack);
-	ft_pa(a_stack, b_stack);
-}
-
-void	dealing6(t_DList *a_stack, t_DList *b_stack)
-{
-	while (head_value(a_stack) != 0)
-		ft_ra(a_stack);
-	ft_pb(a_stack, b_stack);
-	while (head_value(a_stack) != 1)
-		ft_ra(a_stack);
-	ft_pb(a_stack, b_stack);
-	while (head_value(a_stack) != 2)
-		ft_ra(a_stack);
-	ft_pb(a_stack, b_stack);
-	dealing3(a_stack);
-	ft_pa(a_stack, b_stack);
-	ft_pa(a_stack, b_stack);
 	ft_pa(a_stack, b_stack);
 }
