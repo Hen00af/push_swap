@@ -1,54 +1,64 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: shattori <shattori@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/12 16:36:22 by shattori          #+#    #+#             */
-/*   Updated: 2025/04/15 14:26:44 by shattori         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "push_swap.h"
 
-int	ft_max(int i, int j)
+void create_index(t_stacks *s)
 {
-	if (i < j)
-		return (j);
-	else
-		return (i);
-}
-int	ft_min(int i, int j)
-{
-	if (i < j)
-		return (i);
-	else
-		return (j);
-}
-int ft_abs(int num)
-{
-    if(num < 0)
-        return(-1*num);
-    else
-        return(num);
+    int i;
+    int j;
+    int k;
+    int *new_a;
+
+    new_a = malloc(s->a_size * sizeof * new_a);
+    if(new_a == NULL)
+        free_and_exit_with_message(s,"Error\n");
+    i = -1;
+    while (++i < s -> a_size)
+    {
+        k = 0;
+        j = -1;
+        while (j ++ < s->a_s)
+    }
 }
 
-int	head_value(t_DList *stack)
+int ft_atol(const char *n, t_stacks *s)
 {
-	if (!stack || !stack->head)
-	{
-		fprintf(stderr, "Error: empty stack access\n");
-		exit(EXIT_FAILURE); 
-	}
-	return (stack->head->value);
+    int i;
+    long sign;
+    long long res;
+
+    res =0;
+    sign = 1;
+    i = 0;
+    while(n[i] == ' ' || (n[i] >= '\t'))
+        i++;
+    if((n[i] == '+' || n[i] == '-'))
+    {
+        if( n[i] == '-')
+            sign = -1;
+        i++;
+    }
+    while (n[i])
+    {
+        if(res > INT_MAX || (res * sign) < INT_MIN || ft_strlen(n) > 11)
+            free_and_exit_with_message(s,"Error\n");
+        if(!(n[i] >= '0' && n[i] <= '9'))
+            free_and_exit_with_message(s,"Error\n");
+        res = res *10 + (n[i++] - '0');
+    }
+    return ((int)(res * sign));
+
 }
-int tail_value(t_DList *stack)
+
+void parse_number(t_stacks *s)
 {
-	if (!stack || !stack->head)
-	{
-		fprintf(stderr, "Error: empty stack access\n");
-		exit(EXIT_FAILURE); // or handle gracefully
-	}
-	return (stack->tail->value);
+    char **tmp;
+    int i;
+    int z;
+
+    z = 0;
+    tmp = ft_split(s->join_args, ' ');
+    i = 0;
+    while (tmp[i] != NULL && tmp[i][0] != '\0')
+    {
+        s->a[z++] = ft_ato
+    }
 }
